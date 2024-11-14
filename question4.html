@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Slider</title>
+    <style>
+        #slider img {
+            display: none;
+            width: 400px;
+            height: 300px;
+        }
+        #slider img.active {
+            display: block;
+        }
+    </style>
+    <script src="script/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div id="slider">
+    <img src="bus.jpg" class="active" alt="Image 1">
+    <img src="logo.jpg" alt="Image 2">
+    <img src="slide.png" alt="Image 3">
+</div>
+
+<button id="prev">Previous</button>
+<button id="next">Next</button>
+
+<script>
+    var currentIndex = 0;
+    var images = $("#slider img");
+
+    $("#next").click(function () {
+        images.eq(currentIndex).removeClass("active");
+        currentIndex = (currentIndex + 1) % images.length;
+        images.eq(currentIndex).addClass("active");
+    });
+
+    $("#prev").click(function () {
+        images.eq(currentIndex).removeClass("active");
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        images.eq(currentIndex).addClass("active");
+    });
+</script>
+
+</body>
+</html>

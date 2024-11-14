@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Toggle Div</title>
+    <script src="script/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<button id="toggleButton">Toggle Div</button>
+
+<div id="myDiv" style="display:none; margin-top:10px;">
+    This is a hidden div.
+</div>
+
+<script>
+    $("#toggleButton").click(function () {
+        $("#myDiv").toggle(); // Toggle visibility
+    });
+</script>
+
+</body>
+</html>

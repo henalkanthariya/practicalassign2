@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocomplete Search</title>
+    <style>
+        #results {
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none; /* Hide initially */
+        }
+        .result-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .result-item:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <h1>Search Books</h1>
+    <input type="text" id="search" placeholder="Search..." autocomplete="off">
+    <div id="results"></div>
+
+    <script>
+        $(document).ready(function() {
+            const books = [
+                { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald' },
+                { title: 'To Kill a Mockingbird', author: 'Harper Lee' },
+                { title: '1984', author: 'George Orwell' },
+                { title: 'Pride and Prejudice', author: 'Jane Austen' }
+            ];
+
+            $('#search').on('input', function() {
+                let query = $(this).val().toLowerCase().trim();
+                $('#results').empty(); 
+
+                if (query.length > 1) {
+                    let filteredBooks = books.filter(book => book.title.toLowerCase().includes(query));
+
+                    if (filteredBooks.length > 0) {
+                        $('#results').show(); 
+
+                        filteredBooks.forEach(book => {
+                            $('#results').append(`<div class="result-item">${book.title}</div>`);
+                        });
+
+                    } else {
+                        $('#results').hide(); 
+                    }
+                } else {
+                    $('#results').hide();  
+                }
+            });
+
+           
+            $(document).on('click', '.result-item', function() {
+                let selectedBook = $(this).text();
+                $('#search').val(selectedBook);
+                $('#results').hide();  
+            });
+
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('#search, #results').length) {
+                    $('#results').hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

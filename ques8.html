@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <style>
+        #chat-box { 
+            height: 300px; 
+            overflow-y: auto; 
+            border: 1px solid #ccc; 
+            padding: 10px; 
+        }
+        .message { 
+            margin-bottom: 10px; 
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Chat</h1>
+    <div id="chat-box"></div>
+    <form id="chat-form">
+        <input type="text" id="message" placeholder="Type a message" required>
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        let messages = [];
+
+        function displayMessages() {
+            let chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML = messages.map(msg => `<div class="message">${msg}</div>`).join('');
+            // Scroll to the bottom of the chat box when a new message is added
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        $('#chat-form').submit(function(e) {
+            e.preventDefault();
+            let message = $('#message').val().trim();
+            if (message) {
+                messages.push(message);
+                $('#message').val('');  // Clear the input field
+                displayMessages();  // Update chat display
+            }
+        });
+    </script>
+</body>
+</html>

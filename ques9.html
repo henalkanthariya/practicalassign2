@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load More Content</title>
+</head>
+<body>
+    <h1>Posts</h1>
+    <div id="content"></div>
+    <button id="load-more">Load More</button>
+
+    <script>
+        let posts = [
+            "Post 1: JAVA",
+            "Post 2: React JS",
+            "Post 3: C++",
+            "Post 4: C",
+            "Post 5: Advanced Java",
+            "Post 6: Python"
+        ];
+
+        let itemsPerPage = 2;
+        let currentPage = 1;
+
+        function displayPosts() {
+            let contentDiv = document.getElementById('content');
+            let start = (currentPage - 1) * itemsPerPage;
+            let end = currentPage * itemsPerPage;
+            let newPosts = posts.slice(start, end);
+
+            newPosts.forEach(post => {
+                contentDiv.innerHTML += `<p>${post}</p>`;
+            });
+        }
+
+        document.getElementById('load-more').addEventListener('click', function() {
+            currentPage++;
+            displayPosts();
+        });
+
+        displayPosts(); // Initial load
+    </script>
+</body>
+</html>

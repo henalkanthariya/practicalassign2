@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Data from JSON</title>
+    <style>
+        .book-card { border: 1px solid #ccc; padding: 10px; margin: 10px; border-radius: 8px; }
+        .book-title { font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Books</h1>
+    <div id="books"></div>
+
+    <script>
+        fetch('books.json') // Local JSON file
+        .then(response => response.json())
+        .then(data => {
+            let booksDiv = document.getElementById('books');
+            data.forEach(book => {
+                booksDiv.innerHTML += `
+                    <div class="book-card">
+                        <p class="book-title">${book.title}</p>
+                        <p>Author: ${book.author}</p>
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        .weather-info { border: 1px solid #ccc; padding: 10px; margin: 10px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Weather App</h1>
+    <input type="text" id="city" placeholder="Enter city">
+    <button id="get-weather">Get Weather</button>
+    <div id="weather-info"></div>
+
+    <script>
+        const weatherData = {
+            "Surat": { temp: "15°C", description: "Cloudy", icon: "🌥️" },
+            "Vadodra": { temp: "22°C", description: "Sunny", icon: "☀️" },
+            "Mumbai": { temp: "10°C", description: "Windy", icon: "🌬️" }
+        };
+
+        document.getElementById('get-weather').addEventListener('click', function() {
+            let city = document.getElementById('city').value;
+            let weather = weatherData[city];
+
+            if (weather) {
+                document.getElementById('weather-info').innerHTML = `
+                    <div class="weather-info">
+                        <p>Temperature: ${weather.temp}</p>
+                        <p>Weather: ${weather.description}</p>
+                        <p>Icon: ${weather.icon}</p>
+                    </div>
+                `;
+            } else {
+                document.getElementById('weather-info').innerHTML = '<p>City not found!</p>';
+            }
+        });
+    </script>
+</body>
+</html>
